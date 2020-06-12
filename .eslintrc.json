@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "object-curly-newline": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "operator-linebreak": 0,
+    "camelcase": 0,
+    "implicit-arrow-linebreak": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react-hooks/exhaustive-deps": 0
+  }
+}
