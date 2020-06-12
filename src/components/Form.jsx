@@ -1,9 +1,22 @@
 import React from 'react';
-import moment from 'moment';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
+import moment from 'moment';
+
+import { updateText } from '../redux/actions/appActions';
 
 export default function Form() {
+  const dispatch = useDispatch();
   moment().format();
+  const { number } = useSelector((state) => state.form);
+
+  const handleChange = (type, e) => {
+    dispatch(updateText({ type, value: e.target.value }));
+  };
+
+  const handleClick = (e) => {
+    console.log(e);
+  };
 
   return (
     <div className="form">
@@ -12,12 +25,17 @@ export default function Form() {
           <BootstrapForm.Label className="form__label">
             Card Number
           </BootstrapForm.Label>
-          <BootstrapForm.Control className="form__input" type="text" />
+          <BootstrapForm.Control
+            onChange={(e) => handleChange('number', e)}
+            className="form__input"
+            type="text"
+            value={number}
+          />
         </BootstrapForm.Group>
 
         <BootstrapForm.Group>
           <BootstrapForm.Label className="form__label">
-            Card Holders
+            Card Holder
           </BootstrapForm.Label>
           <BootstrapForm.Control className="form__input" type="text" />
         </BootstrapForm.Group>
@@ -33,6 +51,7 @@ export default function Form() {
                   className="form__input form__input--date"
                   as="select"
                   value="month"
+                  onChange={handleClick}
                 >
                   <option value="month" disabled>
                     Month
@@ -46,6 +65,7 @@ export default function Form() {
                   className="form__input form__input--date"
                   as="select"
                   value="year"
+                  onChange={handleClick}
                 >
                   <option value="year" disabled>
                     Year

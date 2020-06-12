@@ -4,7 +4,7 @@
   width: 100%;
 
   &__inner {
-    margin-top: 100px;
+    margin-top: -50px;
     background: $white;
     box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
     border-radius: 10px;
@@ -51,6 +51,7 @@
       width: 45%;
       display: inline-block;
       margin-right: 15px;
+      font-size: 16px;
     }
   }
 
@@ -68,7 +69,14 @@
     cursor: pointer;
 
     &:hover {
-      background: darken($buttonBlue, 5%);
+      background: darken($buttonBlue, 4%);
+    }
+
+    &:focus,
+    &:active {
+      background: darken($buttonBlue, 7%) !important;
+      outline: none !important;
+      box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3) !important;
     }
   }
 }
