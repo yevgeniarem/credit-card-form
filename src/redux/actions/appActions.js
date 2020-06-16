@@ -1,17 +1,9 @@
-export const updateNumber = (payload) => (dispatch) => {
-  dispatch({
-    type: 'UPDATE_NUMBER',
-    payload,
-  });
+// eslint-disable-next-line import/prefer-default-export
+export const updateForm = (payload) => async (dispatch) => {
+  await dispatch({ type: 'UPDATE_FORM', payload });
+  dispatch({ type: 'UPDATE_CARD', payload });
 };
 
-export const updateName = (payload) => (dispatch) => {
-  dispatch({
-    type: 'UPDATE_NAME',
-    payload,
-  });
-};
-
-export const updateText = (payload) => (dispatch) => {
-  dispatch({ type: 'UPDATE_TEXT', payload });
+export const toggleFocus = (payload) => async (dispatch) => {
+  dispatch({ type: 'TOGGLE_FOCUS', payload });
 };

@@ -1,12 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-import Card from './Card';
+import CardFront from './CardFront';
+import CardBack from './CardBack';
 import Form from './Form';
 
 function App() {
+  const { isCVVFocused } = useSelector((state) => state.form);
+
   return (
     <>
-      <Card />
+      {isCVVFocused ? <CardBack /> : <CardFront />}
       <Form />
     </>
   );

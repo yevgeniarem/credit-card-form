@@ -1,21 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
-import moment from 'moment';
 
-import { updateText } from '../redux/actions/appActions';
+import { updateForm, toggleFocus } from '../redux/actions/appActions';
+import { months, years } from '../utils/constants';
 
 export default function Form() {
   const dispatch = useDispatch();
-  moment().format();
-  const { number } = useSelector((state) => state.form);
+  const { number, name, cvv, month, year } = useSelector((state) => state.form);
 
   const handleChange = (type, e) => {
-    dispatch(updateText({ type, value: e.target.value }));
-  };
-
-  const handleClick = (e) => {
-    console.log(e);
+    dispatch(updateForm({ type, value: e.target.value }));
   };
 
   return (
@@ -37,7 +32,12 @@ export default function Form() {
           <BootstrapForm.Label className="form__label">
             Card Holder
           </BootstrapForm.Label>
-          <BootstrapForm.Control className="form__input" type="text" />
+          <BootstrapForm.Control
+            onChange={(e) => handleChange('name', e)}
+            className="form__input"
+            type="text"
+            value={name}
+          />
         </BootstrapForm.Group>
 
         <div className="container">
@@ -50,29 +50,33 @@ export default function Form() {
                 <BootstrapForm.Control
                   className="form__input form__input--date"
                   as="select"
-                  value="month"
-                  onChange={handleClick}
+                  value={month || 'month'}
+                  onChange={(e) => handleChange('month', e)}
                 >
                   <option value="month" disabled>
                     Month
                   </option>
-                  <option value="1">1</option>
-                  <option vale="2">2</option>
-                  <option vale="3">3</option>
+                  {months.map((m) => (
+                    <option value={m.value} key={m.id}>
+                      {m.value}
+                    </option>
+                  ))}
                 </BootstrapForm.Control>
 
                 <BootstrapForm.Control
                   className="form__input form__input--date"
                   as="select"
-                  value="year"
-                  onChange={handleClick}
+                  value={year || 'year'}
+                  onChange={(e) => handleChange('year', e)}
                 >
                   <option value="year" disabled>
                     Year
                   </option>
-                  <option value="2020">{moment().year()}</option>
-                  <option value="2021">2021</option>
-                  <option value="2022">2022</option>
+                  {years.map((y) => (
+                    <option value={y.value} key={y.id}>
+                      {y.value}
+                    </option>
+                  ))}
                 </BootstrapForm.Control>
               </BootstrapForm.Group>
             </div>
@@ -82,7 +86,14 @@ export default function Form() {
                 <BootstrapForm.Label className="form__label">
                   CVV
                 </BootstrapForm.Label>
-                <BootstrapForm.Control className="form__input" type="text" />
+                <BootstrapForm.Control
+                  onChange={(e) => handleChange('cvv', e)}
+                  onFocus={() => dispatch(toggleFocus(true))}
+                  onBlur={() => dispatch(toggleFocus(false))}
+                  className="form__input"
+                  type="text"
+                  value={cvv}
+                />
               </BootstrapForm.Group>
             </div>
           </div>
