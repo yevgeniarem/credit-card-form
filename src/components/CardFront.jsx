@@ -8,7 +8,7 @@ export default function CardFront() {
   const { number, name, month, year } = useSelector((state) => state.card);
 
   return (
-    <div className="card">
+    <div className="card card--front">
       <img
         src={`${IMG_URL}/${currentCardBackground}.jpeg`}
         alt="random credit card background"

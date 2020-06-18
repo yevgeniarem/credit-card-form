@@ -8,7 +8,7 @@ export default function CardBack() {
   const { number, cvv } = useSelector((state) => state.card);
 
   return (
-    <div className="card">
+    <div className="card card--back">
       <img
         src={`${IMG_URL}/${currentCardBackground}.jpeg`}
         alt="random credit card background"

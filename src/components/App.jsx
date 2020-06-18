@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import CardFront from './CardFront';
 import CardBack from './CardBack';
@@ -10,7 +11,17 @@ function App() {
 
   return (
     <>
-      {isCVVFocused ? <CardBack /> : <CardFront />}
+      <div className="card__container">
+        <div
+          className={classNames(
+            'card--flipper',
+            isCVVFocused && 'card--flipping',
+          )}
+        >
+          <CardFront />
+          <CardBack />
+        </div>
+      </div>
       <Form />
     </>
   );
