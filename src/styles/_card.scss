@@ -6,31 +6,32 @@
   box-shadow: 0 20px 60px 0 rgba(14, 42, 90, 0.55);
   border-radius: 15px;
   color: $white;
+  position: absolute;
+  top: -135px;
+  left: 50%;
+  margin-left: -208px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
-  position: absolute;
-  top: -135px;
-  left: 35.5vw;
 
   &__container {
-    perspective: 1000px;
-    -moz-transform: perspective(1000px);
+    transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    perspective: 1000px;
     -webkit-perspective: 1000;
     -moz-perspective: 1000;
     -o-perspective: 1000;
-    -webkit-transition: 0.6s;
-    -webkit-transform-style: preserve-3d;
-    -moz-transition: 0.6s;
-    -moz-transform-style: preserve-3d;
-    -o-transition: 0.6s;
-    -o-transform-style: preserve-3d;
-    -ms-transition: 0.6s;
-    -ms-transform-style: preserve-3d;
     transition: 0.6s;
-    transform-style: preserve-3d;
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s;
+    -ms-transition: 0.6s;
+    transform: none;
+    -moz-transform: perspective(1000px);
   }
 
   &--front {
@@ -51,11 +52,13 @@
   }
 
   &--flipper {
-    transition: 0.8s;
+    transition: 1s;
     transform-style: preserve-3d;
-    position: relative;
-    -moz-transform: perspective(1000px);
     -moz-transform-style: preserve-3d;
+    position: relative;
+    transform: none;
+    -moz-transform: perspective(1000px);
+    transition-timing-function: ease-in-out;
   }
 
   &--flipping {
@@ -84,6 +87,7 @@
     top: 25px;
     right: 25px;
     max-width: 100px;
+    max-height: 60px;
 
     &--back {
       position: absolute;
@@ -92,14 +96,17 @@
       max-width: 100px;
       opacity: 0.8;
       max-width: 90px;
+      max-height: 55px;
     }
   }
 
-  &__numbers {
+  &__numbers,
+  &__numberMask {
     position: absolute;
     top: 115px;
     left: 30px;
     font-size: 27px;
+    white-space: pre-wrap;
   }
 
   &__input-group {

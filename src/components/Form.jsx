@@ -1,16 +1,40 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
+import Cleave from 'cleave.js/react';
 
-import { updateForm, toggleFocus } from '../redux/actions/appActions';
+import {
+  updateForm,
+  updateNumber,
+  toggleFocus,
+  updateCard,
+} from '../redux/actions/appActions';
 import { months, years } from '../utils/constants';
+import { updateMask } from '../utils/helpers';
 
 export default function Form() {
   const dispatch = useDispatch();
-  const { number, name, cvv, month, year } = useSelector((state) => state.form);
+  const [
+    { number, name, cvv, month, year },
+    { numberMask },
+  ] = useSelector((state) => [state.form, state.card]);
 
   const handleChange = (type, e) => {
     dispatch(updateForm({ type, value: e.target.value }));
+  };
+
+  const onCreditCardTypeChanged = (cardType) => {
+    if (
+      cardType === 'visa' ||
+      cardType === 'amex' ||
+      cardType === 'mastercard' ||
+      cardType === 'discover' ||
+      cardType === 'troy'
+    ) {
+      dispatch(updateForm({ type: 'cardType', value: cardType }));
+    } else {
+      dispatch(updateForm({ type: 'cardType', value: 'visa' }));
+    }
   };
 
   return (
@@ -20,11 +44,22 @@ export default function Form() {
           <BootstrapForm.Label className="form__label">
             Card Number
           </BootstrapForm.Label>
-          <BootstrapForm.Control
-            onChange={(e) => handleChange('number', e)}
-            className="form__input"
-            type="text"
+          <Cleave
+            onChange={(e) => {
+              dispatch(
+                updateCard({
+                  type: 'numberMask',
+                  value: updateMask(numberMask, e.target.value),
+                }),
+              );
+              dispatch(updateNumber({ type: 'number', value: e.target.value }));
+            }}
+            className="form__input form-control"
             value={number}
+            options={{
+              creditCard: true,
+              onCreditCardTypeChanged,
+            }}
           />
         </BootstrapForm.Group>
 

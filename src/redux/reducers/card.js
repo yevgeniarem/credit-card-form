@@ -1,10 +1,11 @@
 const initialState = {
-  number: '#### #### #### ####',
-  amexNumber: '#### ###### ####',
+  number: '',
+  numberMask: '#### #### #### ####',
   name: 'FULL NAME',
   month: 'MM',
   year: 'YY',
   cvv: '',
+  cardType: 'visa',
   isCardFlipped: false,
   isInputFocused: false,
 };

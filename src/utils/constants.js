@@ -15,11 +15,3 @@ export const years = [...new Array(11)].map((y, idx) => ({
   id: idx + 1,
   value: moment().year() + idx,
 }));
-
-export const cardsInfo = [
-  { type: 'visa', regex: '^4' },
-  { type: 'amex', regex: '^(34|37)' },
-  { type: 'mastercard', regex: '^5[1-5]' },
-  { type: 'discover', regex: '^6011' },
-  { type: 'troy', regex: '^9792' },
-];
