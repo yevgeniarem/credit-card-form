@@ -5,18 +5,17 @@ import Cleave from 'cleave.js/react';
 
 import {
   updateForm,
-  updateNumber,
   toggleFocus,
   updateCard,
 } from '../redux/actions/appActions';
 import { months, years } from '../utils/constants';
-import { updateMask } from '../utils/helpers';
+import { determineNumbers, isCardTypeRecognized } from '../utils/helpers';
 
 export default function Form() {
   const dispatch = useDispatch();
   const [
     { number, name, cvv, month, year },
-    { numberMask },
+    { cardType: creditCardType },
   ] = useSelector((state) => [state.form, state.card]);
 
   const handleChange = (type, e) => {
@@ -24,17 +23,12 @@ export default function Form() {
   };
 
   const onCreditCardTypeChanged = (cardType) => {
-    if (
-      cardType === 'visa' ||
-      cardType === 'amex' ||
-      cardType === 'mastercard' ||
-      cardType === 'discover' ||
-      cardType === 'troy'
-    ) {
-      dispatch(updateForm({ type: 'cardType', value: cardType }));
-    } else {
-      dispatch(updateForm({ type: 'cardType', value: 'visa' }));
-    }
+    dispatch(
+      updateForm({
+        type: 'cardType',
+        value: isCardTypeRecognized(cardType) ? cardType : 'visa',
+      }),
+    );
   };
 
   return (
@@ -48,11 +42,10 @@ export default function Form() {
             onChange={(e) => {
               dispatch(
                 updateCard({
-                  type: 'numberMask',
-                  value: updateMask(numberMask, e.target.value),
+                  type: 'number',
+                  value: determineNumbers(creditCardType, e.target.value),
                 }),
               );
-              dispatch(updateNumber({ type: 'number', value: e.target.value }));
             }}
             className="form__input form-control"
             value={number}

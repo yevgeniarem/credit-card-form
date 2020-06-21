@@ -2,9 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { currentCardBackground, IMG_URL } from '../utils/constants';
+import { determineNumbers, generateLogoUrl } from '../utils/helpers';
 
 export default function CardFront() {
-  const { number, numberMask, name, month, year, cardType } = useSelector(
+  const { number, name, month, year, cardType } = useSelector(
     (state) => state.card,
   );
 
@@ -21,15 +22,15 @@ export default function CardFront() {
         className="card__chip"
       />
       <img
-        src={`${IMG_URL}/${cardType}.png`}
+        src={generateLogoUrl(cardType)}
         alt="credit card logo"
         className="card__logo"
       />
-      <div className="card__numberMask">{numberMask}</div>
-      <div className="card__numbers">{number}</div>
+      {/* <div className="card__numberMask">{determineCardMask(cardType)}</div> */}
+      <div className="card__numbers">{determineNumbers(cardType, number)}</div>
       <div className="card__input-group card__input-group--name">
         <div className="card__input-title">Card Holder</div>
-        <div className="card__input-response">{name}</div>
+        <div className="card__input-response">{name || 'FULL NAME'}</div>
       </div>
       <div className="card__input-group card__input-group--date">
         <div className="card__input-title">Expires</div>

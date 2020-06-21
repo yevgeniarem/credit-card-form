@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { currentCardBackground, IMG_URL } from '../utils/constants';
+import { generateLogoUrl } from '../utils/helpers';
 
 export default function CardBack() {
   const { cvv, cardType } = useSelector((state) => state.card);
@@ -18,7 +19,7 @@ export default function CardBack() {
       <div className="card__cvv-band" />
       <div className="card__cvv-text">{cvv}</div>
       <img
-        src={`${IMG_URL}/${cardType}.png`}
+        src={generateLogoUrl(cardType)}
         alt="credit card logo"
         className="card__logo--back"
       />

@@ -1,11 +1,29 @@
-// eslint-disable-next-line import/prefer-default-export
-export const updateMask = (mask, number) => {
-  const maskArr = mask.split('');
-  if (number.length - 1 === -1) return mask;
-  if (number.charAt(number.length - 1) === ' ') {
-    maskArr.splice(number.length - 2, 1, ' ');
-  } else {
-    maskArr.splice(number.length - 1, 1, ' ');
-  }
-  return maskArr.join('');
+import { cardMasks, recognizedCardTypes, IMG_URL } from './constants';
+
+export const determineCardMask = (cardType) => {
+  // eslint-disable-next-line no-prototype-builtins
+  if (cardMasks.hasOwnProperty(cardType)) return cardMasks[cardType];
+  return cardMasks.default;
 };
+
+export const determineNumbers = (cardType, number) => {
+  const maskArr = determineCardMask(cardType).split('');
+  const numArr = number.split('');
+
+  return maskArr
+    .map((e, idx) => {
+      if (e === ' ') return ' ';
+      if (numArr[idx] === ' ') return '#';
+      if (numArr[idx]) return numArr[idx];
+      return '#';
+    })
+    .join('');
+};
+
+export const isCardTypeRecognized = (cardType) =>
+  recognizedCardTypes.includes(cardType);
+
+export const generateLogoUrl = (cardType) =>
+  `${IMG_URL}/${
+    cardType === 'diners' || cardType === 'uatp' ? 'visa' : cardType
+  }.png`;

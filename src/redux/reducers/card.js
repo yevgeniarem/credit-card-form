@@ -1,6 +1,5 @@
 const initialState = {
-  number: '',
-  numberMask: '#### #### #### ####',
+  number: '#### #### #### ####',
   name: 'FULL NAME',
   month: 'MM',
   year: 'YY',

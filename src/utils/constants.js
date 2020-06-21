@@ -15,3 +15,22 @@ export const years = [...new Array(11)].map((y, idx) => ({
   id: idx + 1,
   value: moment().year() + idx,
 }));
+
+export const cardMasks = {
+  default: '#### #### #### ####',
+  amex: '#### ###### #####',
+  diners: '#### ###### ####',
+  uatp: '#### ##### ######',
+};
+
+export const recognizedCardTypes = [
+  'visa',
+  'amex',
+  'mastercard',
+  'discover',
+  'troy',
+  'diners',
+  'uatp',
+];
+
+// TODO: don't have diners and uatp logos
