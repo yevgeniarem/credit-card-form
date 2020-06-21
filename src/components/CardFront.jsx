@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import { currentCardBackground, IMG_URL } from '../utils/constants';
-import { determineNumbers, generateLogoUrl } from '../utils/helpers';
+import { generateLogoUrl, determineNumbersIdx } from '../utils/helpers';
 
 export default function CardFront() {
   const { number, name, month, year, cardType } = useSelector(
@@ -26,8 +27,23 @@ export default function CardFront() {
         alt="credit card logo"
         className="card__logo"
       />
-      {/* <div className="card__numberMask">{determineCardMask(cardType)}</div> */}
-      <div className="card__numbers">{determineNumbers(cardType, number)}</div>
+      <div className="card__numbers">
+        {number.split('').map((n, idx) => {
+          return (
+            <span
+              // eslint-disable-next-line react/no-array-index-key
+              key={idx}
+              className={classNames(
+                'card__number',
+                determineNumbersIdx(number) === idx &&
+                  'card__number--transition',
+              )}
+            >
+              {n}
+            </span>
+          );
+        })}
+      </div>
       <div className="card__input-group card__input-group--name">
         <div className="card__input-title">Card Holder</div>
         <div className="card__input-response">{name || 'FULL NAME'}</div>

@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+moment().format();
+
 export const IMG_URL =
   'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images';
 
@@ -10,7 +12,6 @@ export const months = [...new Array(12)].map((m, idx) => ({
   value: idx + 1 < 10 ? `0${idx + 1}` : idx + 1,
 }));
 
-moment().format();
 export const years = [...new Array(11)].map((y, idx) => ({
   id: idx + 1,
   value: moment().year() + idx,
@@ -32,5 +33,3 @@ export const recognizedCardTypes = [
   'diners',
   'uatp',
 ];
-
-// TODO: don't have diners and uatp logos

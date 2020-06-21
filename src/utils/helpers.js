@@ -20,6 +20,12 @@ export const determineNumbers = (cardType, number) => {
     .join('');
 };
 
+export const determineNumbersIdx = (numbers) => {
+  const numArr = numbers.split('');
+  const idx = numArr.findIndex((n) => n === '#');
+  return numArr[idx - 1] === ' ' ? idx - 2 : idx - 1;
+};
+
 export const isCardTypeRecognized = (cardType) =>
   recognizedCardTypes.includes(cardType);
 
