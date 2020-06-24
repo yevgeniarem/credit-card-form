@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { currentCardBackground, IMG_URL } from '../utils/constants';
-import { generateLogoUrl, determineNumbersIdx } from '../utils/helpers';
+import { generateLogoUrl } from '../utils/helpers';
 
 export default function CardFront() {
-  const { number, name, month, year, cardType } = useSelector(
+  const { number, name, month, year, cardType, numberAnimations } = useSelector(
     (state) => state.card,
   );
 
@@ -35,7 +35,7 @@ export default function CardFront() {
               key={idx}
               className={classNames(
                 'card__number',
-                determineNumbersIdx(number) === idx &&
+                (numberAnimations[idx] || numberAnimations[idx] === 0) &&
                   'card__number--transition',
               )}
             >

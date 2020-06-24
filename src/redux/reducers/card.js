@@ -7,6 +7,7 @@ const initialState = {
   cardType: 'visa',
   isCardFlipped: false,
   isInputFocused: false,
+  numberAnimations: [],
 };
 
 const card = (state = initialState, action) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
 import Cleave from 'cleave.js/react';
@@ -9,13 +9,17 @@ import {
   updateCard,
 } from '../redux/actions/appActions';
 import { months, years } from '../utils/constants';
-import { determineNumbers, isCardTypeRecognized } from '../utils/helpers';
+import {
+  determineNumbers,
+  isCardTypeRecognized,
+  determineCardNumAnimations,
+} from '../utils/helpers';
 
 export default function Form() {
   const dispatch = useDispatch();
   const [
-    { number, name, cvv, month, year },
-    { cardType: creditCardType },
+    { name, cvv, month, year },
+    { cardType: creditCardType, number },
   ] = useSelector((state) => [state.form, state.card]);
 
   const handleChange = (type, e) => {
@@ -31,6 +35,16 @@ export default function Form() {
     );
   };
 
+  useEffect(() => {
+    dispatch(
+      updateCard({
+        type: 'number',
+        value: determineNumbers(creditCardType, number),
+      }),
+    );
+    // eslint-disable-next-line
+  }, [creditCardType]);
+
   return (
     <div className="form">
       <BootstrapForm className="form__inner">
@@ -40,6 +54,15 @@ export default function Form() {
           </BootstrapForm.Label>
           <Cleave
             onChange={(e) => {
+              dispatch(
+                updateCard({
+                  type: 'numberAnimations',
+                  value: determineCardNumAnimations(
+                    number,
+                    determineNumbers(creditCardType, e.target.value),
+                  ),
+                }),
+              );
               dispatch(
                 updateCard({
                   type: 'number',

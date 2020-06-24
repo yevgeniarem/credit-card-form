@@ -20,10 +20,14 @@ export const determineNumbers = (cardType, number) => {
     .join('');
 };
 
-export const determineNumbersIdx = (numbers) => {
-  const numArr = numbers.split('');
-  const idx = numArr.findIndex((n) => n === '#');
-  return numArr[idx - 1] === ' ' ? idx - 2 : idx - 1;
+export const determineCardNumAnimations = (oldNums, newNums) => {
+  const oldArr = oldNums.split('');
+  const newArr = newNums.split('');
+
+  return oldArr.map((n, idx) => {
+    if (n !== newArr[idx]) return idx;
+    return null;
+  });
 };
 
 export const isCardTypeRecognized = (cardType) =>

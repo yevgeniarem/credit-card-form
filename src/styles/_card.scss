@@ -112,7 +112,9 @@
   &__number {
     display: inline-block;
     &--transition {
-      animation: slideUp 0.3s linear;
+      animation: slideUp 0.25s ease-in-out;
+      transition-delay: 0.1s;
+      position: relative;
     }
   }
 
