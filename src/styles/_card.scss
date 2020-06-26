@@ -111,22 +111,6 @@
 
   &__number {
     display: inline-block;
-    &--transition {
-      animation: slideUp 0.25s ease-in-out;
-      transition-delay: 0.1s;
-      position: relative;
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      transform: translateY(15px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0px);
-      opacity: 1;
-    }
   }
 
   &__input-group {
