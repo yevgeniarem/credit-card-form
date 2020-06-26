@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { currentCardBackground, IMG_URL } from '../utils/constants';
 import { generateLogoUrl, determineCardMask } from '../utils/helpers';
@@ -13,10 +13,10 @@ const numberVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      ease: 'easeOut',
-      duration: 0.4,
-    },
+  },
+  up: {
+    opacity: 0,
+    y: -15,
   },
 };
 
@@ -57,7 +57,7 @@ export default function CardFront() {
         alt="credit card logo"
         className="card__logo"
       />
-      <div className="card__numberMask">
+      {/* <div className="card__numberMask">
         {determineCardMask(cardType)
           .split('')
           .map((n, idx) => {
@@ -79,27 +79,25 @@ export default function CardFront() {
               </span>
             );
           })}
-      </div>
+      </div> */}
       <div className="card__numbers">
-        {number.split('').map((n, idx) => {
-          return numberAnimations.includes(idx) ? (
-            <motion.span
-              variants={numberVariants}
-              initial="hidden"
-              animate="visible"
-              // eslint-disable-next-line react/no-array-index-key
-              key={idx}
-              className="card__number"
-            >
-              {n}
-            </motion.span>
-          ) : (
-            // eslint-disable-next-line react/no-array-index-key
-            <span key={idx} className="card__number">
-              {n}
-            </span>
-          );
-        })}
+        <AnimatePresence>
+          {number.split('').map((n, idx) => {
+            return (
+              <motion.span
+                variants={numberVariants}
+                initial="hidden"
+                animate="visible"
+                exit="up"
+                // eslint-disable-next-line react/no-array-index-key
+                key={`${n}${idx}`}
+                className="card__number"
+              >
+                {n}
+              </motion.span>
+            );
+          })}
+        </AnimatePresence>
       </div>
       <div className="card__input-group card__input-group--name">
         <div className="card__input-title">Card Holder</div>
