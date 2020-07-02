@@ -109,8 +109,15 @@
     white-space: pre-wrap;
   }
 
+  &__number-container {
+    position: relative;
+    width: 15px;
+    display: inline-block;
+  }
+
   &__number {
     display: inline-block;
+    position: absolute;
   }
 
   &__input-group {
