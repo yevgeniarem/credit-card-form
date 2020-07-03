@@ -109,15 +109,9 @@
     white-space: pre-wrap;
   }
 
-  &__number-container {
-    position: relative;
-    width: 15px;
-    display: inline-block;
-  }
-
   &__number {
     display: inline-block;
-    position: absolute;
+    position: relative;
   }
 
   &__input-group {
@@ -146,6 +140,17 @@
     text-overflow: ellipsis;
     text-transform: uppercase;
     height: 15px;
+  }
+
+  &__word {
+    display: inline-block;
+    position: relative;
+  }
+
+  &__letter {
+    display: inline-block;
+    position: relative;
+    width: 11px;
   }
 
   &__band {

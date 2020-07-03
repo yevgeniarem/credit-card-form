@@ -1,33 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-import { currentCardBackground, IMG_URL } from '../utils/constants';
+import {
+  currentCardBackground,
+  IMG_URL,
+  slideUpVariants,
+  slideLeftVariants,
+} from '../utils/constants';
 import { generateLogoUrl } from '../utils/helpers';
-
-const numberVariants = {
-  hidden: {
-    opacity: 0,
-    y: 15,
-    transition: {
-      duration: 0.3,
-    },
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-  up: {
-    opacity: 0,
-    y: -15,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
 
 export default function CardFront() {
   const { number, name, month, year, cardType } = useSelector(
@@ -52,36 +33,71 @@ export default function CardFront() {
         className="card__logo"
       />
       <div className="card__numbers">
-        <AnimatePresence>
-          {number.split('').map((n, idx) => {
-            return (
-              <span
-                className="card__number-container"
-                // eslint-disable-next-line react/no-array-index-key
-                key={`${n}${idx}`}
-              >
-                <motion.span
-                  variants={numberVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="up"
-                  className="card__number"
-                >
-                  {n}
-                </motion.span>
-              </span>
-            );
-          })}
-        </AnimatePresence>
+        {number.split('').map((n, idx) => {
+          return (
+            <motion.span
+              variants={slideUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="card__number"
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${n}${idx}`}
+            >
+              {n}
+            </motion.span>
+          );
+        })}
       </div>
       <div className="card__input-group card__input-group--name">
         <div className="card__input-title">Card Holder</div>
-        <div className="card__input-response">{name || 'FULL NAME'}</div>
+        <div className="card__input-response">
+          {name.length === 0 ? (
+            <motion.span
+              variants={slideLeftVariants}
+              initial="hidden"
+              animate="visible"
+              className="card__word"
+            >
+              FULL NAME
+            </motion.span>
+          ) : (
+            name.split('').map((l, idx) => {
+              return (
+                <motion.span
+                  variants={slideLeftVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="card__letter"
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={`${l}${idx}`}
+                >
+                  {l}
+                </motion.span>
+              );
+            })
+          )}
+        </div>
       </div>
       <div className="card__input-group card__input-group--date">
         <div className="card__input-title">Expires</div>
         <div className="card__input-response">
-          {month}/{year.toString().substr(-2)}
+          <motion.span
+            variants={slideUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="card__word"
+          >
+            {month}
+          </motion.span>
+          /
+          <motion.span
+            variants={slideUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="card__word"
+          >
+            {year.toString().substr(-2)}
+          </motion.span>
         </div>
       </div>
     </div>

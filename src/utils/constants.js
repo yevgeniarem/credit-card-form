@@ -2,6 +2,36 @@ import moment from 'moment';
 
 moment().format();
 
+export const slideUpVariants = {
+  hidden: {
+    opacity: 0,
+    y: 15,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: 'easeOut',
+      duration: 0.4,
+    },
+  },
+};
+
+export const slideLeftVariants = {
+  hidden: {
+    opacity: 0,
+    x: 20,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: 'easeOut',
+      duration: 0.2,
+    },
+  },
+};
+
 export const IMG_URL =
   'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images';
 
