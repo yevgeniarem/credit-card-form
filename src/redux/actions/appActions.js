@@ -3,6 +3,30 @@ export const updateForm = (payload) => async (dispatch) => {
   dispatch({ type: 'UPDATE_CARD', payload });
 };
 
+export const updateCVV = (payload) => async (dispatch, getState) => {
+  const { cvv } = getState().form;
+  const { value } = payload;
+  await dispatch({
+    type: 'UPDATE_CVV',
+    payload: {
+      type: 'cvv',
+      value: Number.isInteger(Number(value)) ? value : cvv,
+    },
+  });
+
+  const { cvv: newCvv } = getState().form;
+  dispatch({
+    type: 'UPDATE_CARD',
+    payload: {
+      type: 'cvv',
+      value: newCvv
+        .split('')
+        .map(() => '*')
+        .join(''),
+    },
+  });
+};
+
 export const updateCard = (payload) => async (dispatch) => {
   dispatch({ type: 'UPDATE_CARD', payload });
 };

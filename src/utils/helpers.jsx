@@ -1,4 +1,8 @@
+import moment from 'moment';
+
 import { cardMasks, recognizedCardTypes, IMG_URL } from './constants';
+
+moment().format();
 
 export const determineCardMask = (cardType) => {
   // eslint-disable-next-line no-prototype-builtins
@@ -37,3 +41,9 @@ export const generateLogoUrl = (cardType) =>
   `${IMG_URL}/${
     cardType === 'diners' || cardType === 'uatp' ? 'visa' : cardType
   }.png`;
+
+export const determineMonth = (month, year) => {
+  return Number(year) === moment().year() && month < moment().month()
+    ? 'month'
+    : month || 'month';
+};

@@ -1,7 +1,10 @@
 .form {
+  min-width: 315px;
   max-width: 570px;
   margin: auto;
   width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
 
   &__inner {
     margin-top: 200px;
@@ -24,6 +27,14 @@
 
   &__column {
     padding: 0px;
+
+    &--left {
+      padding-right: 10px;
+    }
+
+    &--right {
+      padding-left: 10px;
+    }
   }
 
   &__input {
@@ -48,10 +59,13 @@
     }
 
     &--date {
-      width: 45%;
+      width: 100%;
       display: inline-block;
-      margin-right: 15px;
       font-size: 16px;
+    }
+
+    &--year {
+      margin-top: 22.5px;
     }
   }
 

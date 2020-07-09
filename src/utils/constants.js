@@ -12,7 +12,7 @@ export const slideUpVariants = {
     y: 0,
     transition: {
       ease: 'easeOut',
-      duration: 0.4,
+      duration: 0.2,
     },
   },
 };
@@ -29,6 +29,10 @@ export const slideLeftVariants = {
       ease: 'easeOut',
       duration: 0.2,
     },
+  },
+  exit: {
+    opacity: 0,
+    x: 20,
   },
 };
 

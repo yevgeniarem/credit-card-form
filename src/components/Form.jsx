@@ -2,17 +2,20 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
 import Cleave from 'cleave.js/react';
+import moment from 'moment';
 
 import {
   updateForm,
   toggleFocus,
   updateCard,
+  updateCVV,
 } from '../redux/actions/appActions';
 import { months, years } from '../utils/constants';
 import {
   determineNumbers,
   isCardTypeRecognized,
   determineCardNumAnimations,
+  determineMonth,
 } from '../utils/helpers';
 
 export default function Form() {
@@ -21,8 +24,11 @@ export default function Form() {
     { name, cvv, month, year },
     { cardType: creditCardType, number },
   ] = useSelector((state) => [state.form, state.card]);
+  moment().format();
 
   const handleChange = (type, e) => {
+    if (type === 'year' && month < moment().month())
+      dispatch(updateForm({ type: 'month', value: 'MM' }));
     dispatch(updateForm({ type, value: e.target.value }));
   };
 
@@ -92,57 +98,66 @@ export default function Form() {
         </BootstrapForm.Group>
 
         <div className="container">
-          <div className="row">
-            <div className="col-8 form__column">
-              <BootstrapForm.Group>
-                <BootstrapForm.Label className="form__label">
-                  Expiration Date
-                </BootstrapForm.Label>
-                <BootstrapForm.Control
-                  className="form__input form__input--date"
-                  as="select"
-                  value={month || 'month'}
-                  onChange={(e) => handleChange('month', e)}
-                >
-                  <option value="month" disabled>
-                    Month
+          <div className="row ">
+            <div className="col-6 col-md form__column form__column--left justify-content-start">
+              <BootstrapForm.Label className="form__label">
+                Expiration Date
+              </BootstrapForm.Label>
+              <BootstrapForm.Control
+                className="form__input form__input--date"
+                as="select"
+                value={determineMonth(month, year)}
+                onChange={(e) => handleChange('month', e)}
+              >
+                <option value="month" disabled>
+                  Month
+                </option>
+                {months.map((m, idx) => (
+                  <option
+                    value={m.value}
+                    key={m.id}
+                    disabled={
+                      Number(year) === moment().year() && idx < moment().month()
+                    }
+                  >
+                    {m.value}
                   </option>
-                  {months.map((m) => (
-                    <option value={m.value} key={m.id}>
-                      {m.value}
-                    </option>
-                  ))}
-                </BootstrapForm.Control>
-
-                <BootstrapForm.Control
-                  className="form__input form__input--date"
-                  as="select"
-                  value={year || 'year'}
-                  onChange={(e) => handleChange('year', e)}
-                >
-                  <option value="year" disabled>
-                    Year
-                  </option>
-                  {years.map((y) => (
-                    <option value={y.value} key={y.id}>
-                      {y.value}
-                    </option>
-                  ))}
-                </BootstrapForm.Control>
-              </BootstrapForm.Group>
+                ))}
+              </BootstrapForm.Control>
             </div>
 
-            <div className="col-4 form__column">
+            <div className="col-6 col-md form__column form__column--right justify-content-end">
+              <BootstrapForm.Control
+                className="form__input form__input--date form__input--year"
+                as="select"
+                value={year || 'year'}
+                onChange={(e) => handleChange('year', e)}
+              >
+                <option value="year" disabled>
+                  Year
+                </option>
+                {years.map((y) => (
+                  <option value={y.value} key={y.id}>
+                    {y.value}
+                  </option>
+                ))}
+              </BootstrapForm.Control>
+            </div>
+
+            <div className="col-12 col-md form__column">
               <BootstrapForm.Group>
-                <BootstrapForm.Label className="form__label">
+                <BootstrapForm.Label className="form__label form--cvv">
                   CVV
                 </BootstrapForm.Label>
                 <BootstrapForm.Control
-                  onChange={(e) => handleChange('cvv', e)}
+                  onChange={(e) =>
+                    dispatch(updateCVV({ type: 'cvv', value: e.target.value }))
+                  }
                   onFocus={() => dispatch(toggleFocus(true))}
                   onBlur={() => dispatch(toggleFocus(false))}
                   className="form__input"
                   type="text"
+                  maxLength="4"
                   value={cvv}
                 />
               </BootstrapForm.Group>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import {
   currentCardBackground,
@@ -61,20 +61,23 @@ export default function CardFront() {
               FULL NAME
             </motion.span>
           ) : (
-            name.split('').map((l, idx) => {
-              return (
-                <motion.span
-                  variants={slideLeftVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="card__letter"
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={`${l}${idx}`}
-                >
-                  {l}
-                </motion.span>
-              );
-            })
+            <AnimatePresence>
+              {name.split('').map((l, idx) => {
+                return (
+                  <motion.span
+                    variants={slideLeftVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="card__letter"
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`${l}${idx}`}
+                  >
+                    {l}
+                  </motion.span>
+                );
+              })}
+            </AnimatePresence>
           )}
         </div>
       </div>
@@ -86,6 +89,7 @@ export default function CardFront() {
             initial="hidden"
             animate="visible"
             className="card__word"
+            key={month}
           >
             {month}
           </motion.span>
@@ -95,6 +99,7 @@ export default function CardFront() {
             initial="hidden"
             animate="visible"
             className="card__word"
+            key={year}
           >
             {year.toString().substr(-2)}
           </motion.span>
