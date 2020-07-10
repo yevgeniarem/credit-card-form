@@ -188,3 +188,43 @@
     font-size: 13px;
   }
 }
+
+// @media (min-width: 0px) {
+//   .card {
+//     height: 180px;
+
+//     &__background-img {
+//       height: 180px;
+//     }
+//   }
+// }
+
+// @media (min-width: 576px) {
+//   .card {
+//     height: 220px;
+//     max-width: 310px;
+
+//     &__background-img {
+//       height: 220px;
+//     }
+//   }
+// }
+
+// @media (min-width: 760px) {
+//   .card {
+//     max-width: 430px;
+//     height: 270px;
+
+//     &__background-img {
+//       height: 270px;
+//     }
+//   }
+// }
+
+@media (max-width: 500px) {
+  .card {
+    &__background-img {
+      height: 240px;
+    }
+  }
+}

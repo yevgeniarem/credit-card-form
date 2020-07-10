@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form as BootstrapForm, Button } from 'react-bootstrap';
+import { Form as BootstrapForm, Button, Col, Row } from 'react-bootstrap';
 import Cleave from 'cleave.js/react';
 import moment from 'moment';
 
@@ -97,9 +97,9 @@ export default function Form() {
           />
         </BootstrapForm.Group>
 
-        <div className="container">
-          <div className="row ">
-            <div className="col-6 col-md form__column form__column--left justify-content-start">
+        <BootstrapForm.Row>
+          <Col xs={6} sm={4}>
+            <BootstrapForm.Group xs={6} sm={4}>
               <BootstrapForm.Label className="form__label">
                 Expiration Date
               </BootstrapForm.Label>
@@ -124,9 +124,11 @@ export default function Form() {
                   </option>
                 ))}
               </BootstrapForm.Control>
-            </div>
+            </BootstrapForm.Group>
+          </Col>
 
-            <div className="col-6 col-md form__column form__column--right justify-content-end">
+          <Col xs={6} sm={4}>
+            <BootstrapForm.Group>
               <BootstrapForm.Control
                 className="form__input form__input--date form__input--year"
                 as="select"
@@ -142,28 +144,28 @@ export default function Form() {
                   </option>
                 ))}
               </BootstrapForm.Control>
-            </div>
+            </BootstrapForm.Group>
+          </Col>
 
-            <div className="col-12 col-md form__column">
-              <BootstrapForm.Group>
-                <BootstrapForm.Label className="form__label form--cvv">
-                  CVV
-                </BootstrapForm.Label>
-                <BootstrapForm.Control
-                  onChange={(e) =>
-                    dispatch(updateCVV({ type: 'cvv', value: e.target.value }))
-                  }
-                  onFocus={() => dispatch(toggleFocus(true))}
-                  onBlur={() => dispatch(toggleFocus(false))}
-                  className="form__input"
-                  type="text"
-                  maxLength="4"
-                  value={cvv}
-                />
-              </BootstrapForm.Group>
-            </div>
-          </div>
-        </div>
+          <Col xs={12} sm={4}>
+            <BootstrapForm.Group className="form__input--cvv">
+              <BootstrapForm.Label className="form__label">
+                CVV
+              </BootstrapForm.Label>
+              <BootstrapForm.Control
+                onChange={(e) =>
+                  dispatch(updateCVV({ type: 'cvv', value: e.target.value }))
+                }
+                onFocus={() => dispatch(toggleFocus(true))}
+                onBlur={() => dispatch(toggleFocus(false))}
+                className="form__input"
+                type="text"
+                maxLength="4"
+                value={cvv}
+              />
+            </BootstrapForm.Group>
+          </Col>
+        </BootstrapForm.Row>
 
         <Button type="submit" className="form__submit-button">
           Submit

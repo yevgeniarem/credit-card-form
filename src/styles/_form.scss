@@ -5,6 +5,7 @@
   width: 100%;
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 50px;
 
   &__inner {
     margin-top: 200px;
@@ -27,14 +28,6 @@
 
   &__column {
     padding: 0px;
-
-    &--left {
-      padding-right: 10px;
-    }
-
-    &--right {
-      padding-left: 10px;
-    }
   }
 
   &__input {
@@ -59,8 +52,6 @@
     }
 
     &--date {
-      width: 100%;
-      display: inline-block;
       font-size: 16px;
     }
 
@@ -91,6 +82,28 @@
       background: darken($buttonBlue, 7%) !important;
       outline: none !important;
       box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3) !important;
+    }
+  }
+}
+
+@media (min-width: 0px) {
+  .form {
+    &__inner {
+      padding: 20px;
+      padding-top: 180px;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .form {
+    &__inner {
+      padding: 35px;
+      padding-top: 180px;
+    }
+
+    &__input--cvv {
+      margin-left: 10px;
     }
   }
 }
