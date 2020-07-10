@@ -1,15 +1,15 @@
 .card {
   font-family: 'Source Code Pro', monospace;
   user-select: none;
-  max-width: 430px;
+  width: 430px;
   border: none;
   box-shadow: 0 20px 60px 0 rgba(14, 42, 90, 0.55);
   border-radius: 15px;
   color: $white;
   position: absolute;
-  top: -135px;
+  top: 65px;
   left: 50%;
-  margin-left: -208px;
+  margin-left: -215px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
@@ -93,7 +93,6 @@
       position: absolute;
       bottom: 30px;
       right: 15px;
-      max-width: 100px;
       opacity: 0.8;
       max-width: 90px;
       max-height: 55px;
@@ -189,42 +188,153 @@
   }
 }
 
-// @media (min-width: 0px) {
-//   .card {
-//     height: 180px;
-
-//     &__background-img {
-//       height: 180px;
-//     }
-//   }
-// }
-
-// @media (min-width: 576px) {
-//   .card {
-//     height: 220px;
-//     max-width: 310px;
-
-//     &__background-img {
-//       height: 220px;
-//     }
-//   }
-// }
-
-// @media (min-width: 760px) {
-//   .card {
-//     max-width: 430px;
-//     height: 270px;
-
-//     &__background-img {
-//       height: 270px;
-//     }
-//   }
-// }
-
 @media (max-width: 500px) {
   .card {
+    width: 350px;
+    margin-left: -175px;
+    top: 78px;
+
     &__background-img {
       height: 240px;
+    }
+
+    &__chip {
+      top: 20px;
+      left: 20px;
+    }
+
+    &__logo {
+      top: 20px;
+      right: 15px;
+      max-width: 100px;
+      max-height: 50px;
+
+      &--back {
+        bottom: 20px;
+        right: 15px;
+      }
+    }
+
+    &__numbers,
+    &__numberMask {
+      top: 100px;
+      left: 20px;
+    }
+
+    &__input-group {
+      bottom: 20px;
+
+      &--name {
+        left: 20px;
+      }
+
+      &--date {
+        right: 20px;
+      }
+    }
+
+    &__band {
+      height: 45px;
+      margin-top: 25px;
+    }
+
+    &__cvv-title {
+      top: 85px;
+      right: 23px;
+    }
+
+    &__cvv-band {
+      height: 40px;
+      top: 105px;
+      width: 91%;
+    }
+
+    &__cvv-text {
+      top: 113px;
+      right: 27px;
+    }
+  }
+}
+
+@media (max-width: 410px) {
+  .card {
+    width: 260px;
+    margin-left: -130px;
+    top: 40px;
+
+    &__background-img {
+      height: 190px;
+    }
+
+    &__chip {
+      top: 15px;
+      left: 15px;
+      width: 45px;
+    }
+
+    &__logo {
+      top: 15px;
+      right: 15px;
+      max-width: 85px;
+      max-height: 45px;
+
+      &--back {
+        bottom: 15px;
+        right: 10px;
+        max-width: 80px;
+        max-height: 40px;
+      }
+    }
+
+    &__numbers,
+    &__numberMask {
+      top: 80px;
+      left: 15px;
+      font-size: 20px;
+    }
+
+    &__input-group {
+      bottom: 15px;
+
+      &--name {
+        left: 15px;
+      }
+
+      &--date {
+        right: 15px;
+      }
+    }
+
+    &__input-title {
+      font-size: 12px;
+      margin-bottom: 0px;
+    }
+
+    &__input-response {
+      font-size: 15px;
+    }
+
+    &__band {
+      height: 37px;
+      margin-top: 21px;
+    }
+
+    &__cvv-title {
+      top: 66px;
+      right: 20px;
+      font-size: 12px;
+    }
+
+    &__cvv-band {
+      height: 37px;
+      top: 83px;
+      width: 89%;
+    }
+
+    &__cvv-text {
+      top: 88px;
+      right: 20px;
+      font-size: 11px;
     }
   }
 }

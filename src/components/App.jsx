@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <div className="card__container">
+      <div className="card__container d-flex justify-content-center">
         <div
           className={classNames(
             'card--flipper',
