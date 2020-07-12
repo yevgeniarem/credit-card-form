@@ -13,25 +13,27 @@ export const determineCardMask = (cardType) => {
 export const determineNumbers = (cardType, number) => {
   const maskArr = determineCardMask(cardType).split('');
   const numArr = number.split('');
+  const firstSpaceIdx = maskArr.indexOf(' ');
+  const lastSpaceIdx =
+    maskArr.length -
+    1 -
+    number
+      .split('')
+      .reverse()
+      .indexOf((n) => n === ' ');
+
+  console.log(maskArr);
+  console.log(numArr);
 
   return maskArr
     .map((e, idx) => {
       if (e === ' ') return ' ';
       if (numArr[idx] === ' ') return '#';
+      // if (numArr[idx] && idx > firstSpaceIdx) return '*';
       if (numArr[idx]) return numArr[idx];
       return '#';
     })
     .join('');
-};
-
-export const determineCardNumAnimations = (oldNums, newNums) => {
-  const oldArr = oldNums.split('');
-  const newArr = newNums.split('');
-
-  return oldArr.map((n, idx) => {
-    if (n !== newArr[idx]) return idx;
-    return null;
-  });
 };
 
 export const isCardTypeRecognized = (cardType) =>
@@ -44,6 +46,6 @@ export const generateLogoUrl = (cardType) =>
 
 export const determineMonth = (month, year) => {
   return Number(year) === moment().year() && month < moment().month()
-    ? 'month'
-    : month || 'month';
+    ? 'MM'
+    : month || 'MM';
 };

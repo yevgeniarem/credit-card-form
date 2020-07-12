@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form as BootstrapForm, Button, Col, Row } from 'react-bootstrap';
+import { Form as BootstrapForm, Button, Col } from 'react-bootstrap';
 import Cleave from 'cleave.js/react';
 import moment from 'moment';
 
@@ -14,7 +14,6 @@ import { months, years } from '../utils/constants';
 import {
   determineNumbers,
   isCardTypeRecognized,
-  determineCardNumAnimations,
   determineMonth,
 } from '../utils/helpers';
 
@@ -27,8 +26,13 @@ export default function Form() {
   moment().format();
 
   const handleChange = (type, e) => {
-    if (type === 'year' && month < moment().month())
+    if (
+      type === 'year' &&
+      Number(e.target.value) === moment().year() &&
+      month < moment().month()
+    ) {
       dispatch(updateForm({ type: 'month', value: 'MM' }));
+    }
     dispatch(updateForm({ type, value: e.target.value }));
   };
 
@@ -62,15 +66,6 @@ export default function Form() {
             onChange={(e) => {
               dispatch(
                 updateCard({
-                  type: 'numberAnimations',
-                  value: determineCardNumAnimations(
-                    number,
-                    determineNumbers(creditCardType, e.target.value),
-                  ),
-                }),
-              );
-              dispatch(
-                updateCard({
                   type: 'number',
                   value: determineNumbers(creditCardType, e.target.value),
                 }),
@@ -82,6 +77,7 @@ export default function Form() {
               creditCard: true,
               onCreditCardTypeChanged,
             }}
+            name="cc-number"
           />
         </BootstrapForm.Group>
 
@@ -94,6 +90,7 @@ export default function Form() {
             className="form__input"
             type="text"
             value={name}
+            name="cc-name"
           />
         </BootstrapForm.Group>
 
@@ -108,8 +105,9 @@ export default function Form() {
                 as="select"
                 value={determineMonth(month, year)}
                 onChange={(e) => handleChange('month', e)}
+                name="cc-exp-month"
               >
-                <option value="month" disabled>
+                <option value="MM" disabled>
                   Month
                 </option>
                 {months.map((m, idx) => (
@@ -134,6 +132,7 @@ export default function Form() {
                 as="select"
                 value={year || 'year'}
                 onChange={(e) => handleChange('year', e)}
+                name="cc-exp-year"
               >
                 <option value="year" disabled>
                   Year
@@ -162,6 +161,7 @@ export default function Form() {
                 type="text"
                 maxLength="4"
                 value={cvv}
+                name="cc-csc"
               />
             </BootstrapForm.Group>
           </Col>

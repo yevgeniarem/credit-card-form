@@ -27,10 +27,14 @@ export default function CardFront() {
         alt="credit card chip"
         className="card__chip"
       />
-      <img
+      <motion.img
         src={generateLogoUrl(cardType)}
         alt="credit card logo"
         className="card__logo"
+        variants={slideUpVariants}
+        initial="hidden"
+        animate="visible"
+        key={generateLogoUrl(cardType)}
       />
       <div className="card__numbers">
         {number.split('').map((n, idx) => {

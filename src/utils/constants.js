@@ -20,7 +20,7 @@ export const slideUpVariants = {
 export const slideLeftVariants = {
   hidden: {
     opacity: 0,
-    x: 20,
+    x: 15,
   },
   visible: {
     opacity: 1,
@@ -30,10 +30,10 @@ export const slideLeftVariants = {
       duration: 0.2,
     },
   },
-  exit: {
-    opacity: 0,
-    x: 20,
-  },
+  // exit: {
+  //   opacity: 0,
+  //   x: 15,
+  // },
 };
 
 export const IMG_URL =

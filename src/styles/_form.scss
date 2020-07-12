@@ -58,6 +58,10 @@
     &--year {
       margin-top: 22.5px;
     }
+
+    &--cvv {
+      margin-left: 10px;
+    }
   }
 
   &__submit-button {
@@ -91,6 +95,16 @@
     &__inner {
       padding: 35px;
       padding-top: 150px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .form {
+    &__input {
+      &--cvv {
+        margin-left: 0px;
+      }
     }
   }
 }
