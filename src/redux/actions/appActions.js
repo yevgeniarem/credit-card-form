@@ -34,3 +34,14 @@ export const updateCard = (payload) => async (dispatch) => {
 export const toggleFocus = (payload) => async (dispatch) => {
   dispatch({ type: 'TOGGLE_FOCUS', payload });
 };
+
+export const updateFocusInfo = (payload) => async (dispatch, getState) => {
+  const { focusInfo } = getState().card;
+  dispatch({
+    type: 'UPDATE_FOCUS_INFO',
+    payload: {
+      old: focusInfo.new,
+      new: payload,
+    },
+  });
+};

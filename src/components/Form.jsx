@@ -78,6 +78,10 @@ export default function Form() {
               onCreditCardTypeChanged,
             }}
             name="cc-number"
+            onFocus={() =>
+              dispatch(updateCard({ type: 'focus', value: 'numbers' }))
+            }
+            // onBlur={() => dispatch(updateCard({ type: 'focus', value: '' }))}
           />
         </BootstrapForm.Group>
 
@@ -91,6 +95,10 @@ export default function Form() {
             type="text"
             value={name}
             name="cc-name"
+            onFocus={() =>
+              dispatch(updateCard({ type: 'focus', value: 'name' }))
+            }
+            // onBlur={() => dispatch(updateCard({ type: 'focus', value: '' }))}
           />
         </BootstrapForm.Group>
 
@@ -106,6 +114,12 @@ export default function Form() {
                 value={determineMonth(month, year)}
                 onChange={(e) => handleChange('month', e)}
                 name="cc-exp-month"
+                onFocus={() =>
+                  dispatch(updateCard({ type: 'focus', value: 'date' }))
+                }
+                // onBlur={() =>
+                //   dispatch(updateCard({ type: 'focus', value: '' }))
+                // }
               >
                 <option value="MM" disabled>
                   Month
@@ -133,6 +147,12 @@ export default function Form() {
                 value={year || 'year'}
                 onChange={(e) => handleChange('year', e)}
                 name="cc-exp-year"
+                onFocus={() =>
+                  dispatch(updateCard({ type: 'focus', value: 'date' }))
+                }
+                // onBlur={() =>
+                //   dispatch(updateCard({ type: 'focus', value: '' }))
+                // }
               >
                 <option value="year" disabled>
                   Year

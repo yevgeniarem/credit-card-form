@@ -30,10 +30,6 @@ export const slideLeftVariants = {
       duration: 0.2,
     },
   },
-  // exit: {
-  //   opacity: 0,
-  //   x: 15,
-  // },
 };
 
 export const IMG_URL =
