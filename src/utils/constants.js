@@ -32,6 +32,11 @@ export const slideLeftVariants = {
   },
 };
 
+export const noMotionVariants = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1 },
+};
+
 export const IMG_URL =
   'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images';
 

@@ -32,13 +32,15 @@ export default function Form() {
       month < moment().month()
     ) {
       dispatch(updateForm({ type: 'month', value: 'MM' }));
+      dispatch(updateCard({ type: 'month', value: 'MM' }));
     }
     dispatch(updateForm({ type, value: e.target.value }));
+    dispatch(updateCard({ type, value: e.target.value }));
   };
 
   const onCreditCardTypeChanged = (cardType) => {
     dispatch(
-      updateForm({
+      updateCard({
         type: 'cardType',
         value: isCardTypeRecognized(cardType) ? cardType : 'visa',
       }),
@@ -64,6 +66,7 @@ export default function Form() {
           </BootstrapForm.Label>
           <Cleave
             onChange={(e) => {
+              dispatch(updateForm({ type: 'number', value: e.target.value }));
               dispatch(
                 updateCard({
                   type: 'number',
@@ -81,7 +84,6 @@ export default function Form() {
             onFocus={() =>
               dispatch(updateCard({ type: 'focus', value: 'numbers' }))
             }
-            // onBlur={() => dispatch(updateCard({ type: 'focus', value: '' }))}
           />
         </BootstrapForm.Group>
 
@@ -98,7 +100,6 @@ export default function Form() {
             onFocus={() =>
               dispatch(updateCard({ type: 'focus', value: 'name' }))
             }
-            // onBlur={() => dispatch(updateCard({ type: 'focus', value: '' }))}
           />
         </BootstrapForm.Group>
 
@@ -117,9 +118,6 @@ export default function Form() {
                 onFocus={() =>
                   dispatch(updateCard({ type: 'focus', value: 'date' }))
                 }
-                // onBlur={() =>
-                //   dispatch(updateCard({ type: 'focus', value: '' }))
-                // }
               >
                 <option value="MM" disabled>
                   Month
@@ -150,9 +148,6 @@ export default function Form() {
                 onFocus={() =>
                   dispatch(updateCard({ type: 'focus', value: 'date' }))
                 }
-                // onBlur={() =>
-                //   dispatch(updateCard({ type: 'focus', value: '' }))
-                // }
               >
                 <option value="year" disabled>
                   Year

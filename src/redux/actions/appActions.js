@@ -1,6 +1,5 @@
 export const updateForm = (payload) => async (dispatch) => {
-  await dispatch({ type: 'UPDATE_FORM', payload });
-  dispatch({ type: 'UPDATE_CARD', payload });
+  dispatch({ type: 'UPDATE_FORM', payload });
 };
 
 export const updateCVV = (payload) => async (dispatch, getState) => {

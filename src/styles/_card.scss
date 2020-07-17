@@ -103,9 +103,10 @@
   &__numberMask {
     position: absolute;
     top: 115px;
-    left: 30px;
+    left: 20px;
     font-size: 27px;
     white-space: pre-wrap;
+    padding: 5px 10px;
   }
 
   &__number {
@@ -113,19 +114,22 @@
     position: relative;
   }
 
+  &__input-response {
+    margin-bottom: 5px;
+  }
+
   &__input-group {
     position: absolute;
-    bottom: 25px;
-    padding: 3px;
-    padding-bottom: 7px;
+    bottom: 13px;
+    padding: 7px 12px;
 
     &--name {
-      left: 25px;
-      min-width: 290px;
+      left: 15px;
+      width: 310px;
     }
 
     &--date {
-      right: 25px;
+      right: 15px;
     }
   }
 
@@ -211,15 +215,16 @@
     }
 
     &__chip {
-      top: 20px;
-      left: 20px;
+      top: 22px;
+      left: 22px;
+      transform: scale(0.95);
     }
 
     &__logo {
-      top: 20px;
-      right: 15px;
-      max-width: 100px;
-      max-height: 50px;
+      top: 22px;
+      right: 17px;
+      max-width: 105px;
+      max-height: 55px;
 
       &--back {
         bottom: 20px;
@@ -230,18 +235,19 @@
     &__numbers,
     &__numberMask {
       top: 100px;
-      left: 20px;
+      left: 10px;
     }
 
     &__input-group {
-      bottom: 20px;
+      bottom: 10px;
 
       &--name {
-        left: 20px;
+        left: 10px;
+        width: 245px;
       }
 
       &--date {
-        right: 20px;
+        right: 10px;
       }
     }
 
@@ -300,20 +306,23 @@
 
     &__numbers,
     &__numberMask {
-      top: 80px;
-      left: 15px;
+      top: 75px;
+      left: 7px;
       font-size: 20px;
+      padding: 3px 7px;
     }
 
     &__input-group {
-      bottom: 15px;
+      bottom: 7px;
+      padding: 3px 7px;
 
       &--name {
-        left: 15px;
+        left: 12px;
+        width: 165px;
       }
 
       &--date {
-        right: 15px;
+        right: 12px;
       }
     }
 

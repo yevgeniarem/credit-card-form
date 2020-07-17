@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import {
   currentCardBackground,
   IMG_URL,
   slideUpVariants,
   slideLeftVariants,
+  noMotionVariants,
 } from '../utils/constants';
 import { updateFocusInfo } from '../redux/actions/appActions';
 import { generateLogoUrl, fadeInVariants } from '../utils/helpers';
@@ -16,6 +17,7 @@ export default function CardFront() {
   const { number, name, month, year, cardType, focus, focusInfo } = useSelector(
     (state) => state.card,
   );
+  const { number: formNumber } = useSelector((state) => state.form);
   const {
     offsetHeight,
     offsetLeft,
@@ -31,17 +33,16 @@ export default function CardFront() {
   useEffect(() => {
     dispatch(
       updateFocusInfo({
-        height: offsetHeight + 10,
-        width: offsetWidth + 30,
-        left: offsetLeft - 15,
-        top: offsetTop - 5,
+        height: offsetHeight,
+        width: offsetWidth,
+        left: offsetLeft,
+        top: offsetTop,
       }),
     );
     // eslint-disable-next-line
   }, [focus]);
 
   const focusInput = () => {
-    console.log(focusInfo.new);
     return (
       <motion.div
         className="card__focused"
@@ -79,7 +80,9 @@ export default function CardFront() {
         {number.split('').map((n, idx) => {
           return (
             <motion.span
-              variants={slideUpVariants}
+              variants={
+                idx <= formNumber.length ? slideUpVariants : noMotionVariants
+              }
               initial="hidden"
               animate="visible"
               className="card__number"
@@ -104,23 +107,21 @@ export default function CardFront() {
               FULL NAME
             </motion.span>
           ) : (
-            <AnimatePresence>
-              {name.split('').map((l, idx) => {
-                return (
-                  <motion.span
-                    variants={slideLeftVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    className="card__letter"
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={`${l}${idx}`}
-                  >
-                    {l}
-                  </motion.span>
-                );
-              })}
-            </AnimatePresence>
+            name.split('').map((l, idx) => {
+              return (
+                <motion.span
+                  variants={slideLeftVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="card__letter"
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={`${l}${idx}`}
+                >
+                  {l}
+                </motion.span>
+              );
+            })
           )}
         </div>
       </div>
