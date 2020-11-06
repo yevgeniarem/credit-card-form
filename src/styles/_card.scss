@@ -32,6 +32,7 @@
     -ms-transition: 0.6s;
     transform: none;
     -moz-transform: perspective(1000px);
+    height: 100%;
   }
 
   &--front {
@@ -59,6 +60,7 @@
     transform: none;
     -moz-transform: perspective(1000px);
     transition-timing-function: ease-in-out;
+    height: 100%;
   }
 
   &--flipping {
@@ -353,6 +355,33 @@
       top: 88px;
       right: 20px;
       font-size: 11px;
+    }
+  }
+}
+
+/* Safari 11+ */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    .card {
+      top: -130px;
+    }
+  }
+}
+
+/* Safari 10.1 */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (not (stroke-color: transparent)) {
+    .card {
+      top: -130px;
+    }
+  }
+}
+
+/* Safari 6.1-10.0 (not 10.1) */
+@media not all and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
+  @media (min-width: 5px) {
+    .card {
+      top: -130px;
     }
   }
 }
