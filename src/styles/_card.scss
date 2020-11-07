@@ -203,33 +203,6 @@
   }
 }
 
-/* Safari 11+ */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    .card {
-      top: -130px;
-    }
-  }
-}
-
-/* Safari 10.1 */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) and (not (stroke-color: transparent)) {
-    .card {
-      top: -130px;
-    }
-  }
-}
-
-/* Safari 6.1-10.0 (not 10.1) */
-@media not all and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
-  @media (min-width: 5px) {
-    .card {
-      top: -130px;
-    }
-  }
-}
-
 @media (max-width: 500px) {
   .card {
     width: 350px;
@@ -387,28 +360,28 @@
 }
 
 /* Safari 11+ */
-@media not all and (min-resolution: 0.001dpcm) and (max-width: 500px) {
+@media not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-appearance: none) and (stroke-color: transparent) {
     .card {
-      top: -95px;
+      top: -110px;
     }
   }
 }
 
 /* Safari 10.1 */
-@media not all and (min-resolution: 0.001dpcm) and (max-width: 500px) {
+@media not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-appearance: none) and (not (stroke-color: transparent)) {
     .card {
-      top: -95px;
+      top: -110px;
     }
   }
 }
 
 /* Safari 6.1-10.0 (not 10.1) */
-@media not all and (min-color-index: 0) and (-webkit-min-device-pixel-ratio: 0) and (max-width: 500px) {
+@media not all and (min-color-index: 0) and (-webkit-min-device-pixel-ratio: 0) {
   @media (min-width: 5px) {
     .card {
-      top: -95px;
+      top: -110px;
     }
   }
 }
